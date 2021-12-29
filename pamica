@@ -1,0 +1,141 @@
+Elementy <odpracovano>, <prescas_pracovni_den> a <prescas_den_klidu> jsou povinné, mohou se opakovat.
+Vždy je povinný element <hodiny>, může obsahovat hodnotu 0:00, u elementu <odpracovano> je navíc povinné uvést <pocet_smen>.
+<mzdy>
+ <mzda>
+ <dochazka_kod>888</dochazka_kod> .. nepovinné, jen pro informaci
+ <dochazka_nazev>Mzda – první soustruh SSTRH</dochazka_nazev> .. nepovinné, jen pro informaci
+ <hodiny>4:00</hodiny> .. POVINNÉ 
+ .. mzdu nelze zadat, je určena smlouvou (evidováno v PAMICA)
+ </mzda>
+ <mzda>
+ <dochazka_kod>888</dochazka_kod> .. nepovinné, jen pro informaci
+ <dochazka_nazev>Mzda – první soustruh SSTRH</dochazka_nazev> .. nepovinné, jen pro informaci
+ <castka>25.3</castka> .. nepovinné, (sazbu určil v Docházce vedoucí směny na 25,30 Kč)
+ <jednic>4</jednic> .. POVINNÉ
+ </mzda>
+ <mzda>
+ <dochazka_kod>877</dochazka_kod> .. nepovinné, jen pro informaci
+ <dochazka_nazev>Mzda – druhý soustruh ST2</dochazka_nazev> .. nepovinné, jen pro informaci
+ .. částka sazby je v tomto případě definována systémem PAMICA (pevně daná pracovní smlouvou zaměstnance)
+ <jednic>5</jednic> .. POVINNÉ
+ </mzda>
+Existuje jenom „jeden typ“ základní mzdy, import složek je proveden na základě jména elementu: <mzda>. PAMICA použije vhodné složky podle druhu mzdy.
+Nesmí se vyskytovat element <kod> ani <nazev>.
+Pokud je uveden identifikátor <dochazka_kod>, při importu je vyhledána definice s tímto docházkovým kódem.
+Elementy <mzda> se mohou opakovat. (Například rozúčtování na zakázky, nebo použití odlišných výkonových složek. Pokud mzda není podrobně členěná, je zbytečné
+ji v XML uvádět.)
+Musí být uveden buď element <hodiny>, nebo element <jednic>.
+V případě <jednic> je povoleno uvést také element <castka>. (Dynamičtější přidělování sazeb za úkolovou práci.) (Obvykle je sazba nastavena smlouvou.)
+ <premie>
+ <castka>1000</castka> .. nepovinné, částka může být definována systémem PAMICA
+ <jednic>1</jednic> .. nepovinné, chápe se jako 1. V případě většího počtu jednic se částka vynásobí a vyplatí se násobek.
+ </premie>
+ <premie>
+ <castka>2000</castka>
+ </premie>
+ <premie>
+ <dochazka_kod>977</dochazka_kod> .. nepovinné, ROZHODUJE o importu
+ <dochazka_nazev>Prémie - školení</dochazka_nazev> .. nepovinné, jen pro informaci
+ .. částka je definována systémem PAMICA
+ <jednic>2</jednic> .. nepovinné, částka se vynásobí a vyplatí se násobek.
+ </premie>
+Existuje jenom „jeden typ“ prémií, import složek je proveden na základě jména elementu: <premie>. PAMICA použije vhodnou složku.
+Nesmí se vyskytovat element <kod> ani <nazev>.
+Pokud je uveden identifikátor <dochazka_kod>, při importu je vyhledána definice s tímto docházkovým kódem.
+Elementy <premie> se mohou opakovat.
+Musí být uveden buď element <dochazka_kod>, nebo element <castka>. Tím je prémie stanovena.
+Nepovinný element <jednic> umožňuje vyplatit prémii vícekrát (násobek sazby). (Např. prémie za 2 školení.)
+ <osobni_ohodnoceni>
+ <castka>1000</castka> .. nepovinné, částka může být definována systémem PAMICA
+ <interni_poznamka>krátí se koeficientem úvazek/fond režimu</interni_poznamka> .. nepovinné
+ </osobni_ohodnoceni>
+ <osobni_ohodnoceni>
+ <castka>500</castka>
+ <jednic>2</jednic> .. nepovinné, chápe se jako 1. V případě většího počtu jednic se sazba vynásobí a vyplatí se násobek.
+ </osobni_ohodnoceni>
+ <osobni_ohodnoceni>
+ <dochazka_kod>965</dochazka_kod> .. nepovinné, ROZHODUJE o importu
+ <dochazka_nazev>Osobní ohodnocení - firemní školení</dochazka_nazev> .. nepovinné, jen pro informaci
+ .. částka sazby je definována systémem PAMICA
+ <jednic>3</jednic> .. nepovinné, částka se vynásobí a vyplatí se násobek.
+ </osobni_ohodnoceni>
+ <osobni_ohodnoceni>
+ <dochazka_kod>966</dochazka_kod> .. nepovinné, ROZHODUJE o importu
+ <dochazka_nazev>Osobní ohodnocení - výpomoc expedici</dochazka_nazev> .. nepovinné, jen pro informaci
+ .. částka je definována systémem PAMICA
+ </osobni_ohodnoceni> 
+Existuje jenom „jeden typ“ osobního ohodnocení, import složek je proveden na základě jména elementu: <osobni_ohodnoceni>.
+PAMICA použije vhodnou složku.
+Nesmí se vyskytovat element <kod> ani <nazev>.
+Pokud je uveden identifikátor <dochazka_kod>, při importu je vyhledána definice s tímto docházkovým kódem.
+Elementy <osobni_ohodnoceni> se mohou opakovat.
+Musí být uveden buď element <dochazka_kod>, nebo element <castka>. Tím je ohodnocení stanoveno.
+Nepovinný element <jednic> umožňuje vyplatit ohodnocení vícekrát (násobek sazby). (Např. ohodnocení za 3 firemní školení.)
+ <priplatek>
+ <kod>P03</kod> .. ROZHODUJE o importu
+ <nazev>Příplatek za práci ve svátek</nazev> .. nepovinné
+ <hodiny>4:00</hodiny> .. POVINNÉ
+ </priplatek>
+ <priplatek>
+ <kod>P04</kod>
+ <nazev>Příplatek za práci v sobotu a neděli</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P07</kod>
+ <nazev>Příplatek za práci v noci</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P05</kod>
+ <nazev>Jiný příplatek za práci zadaný % výdělku</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P09</kod> .. ROZHODUJE o importu
+ <nazev>Jiný korunový příplatek</nazev> .. nepovinné
+ <dochazka_kod>943</dochazka_kod> .. ROZHODUJE o importu
+ <dochazka_nazev>Příplatek - noc</dochazka_nazev> .. nepovinné, jen pro informaci
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P06</kod>
+ <nazev>Příplatek za pohotovost na pracovišti</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P15</kod>
+ <nazev>Příplatek za pohotovost mimo pracoviště</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+ <priplatek>
+ <kod>P08</kod>
+ <nazev>Příplatek za ztížené pracovní prostředí</nazev>
+ <hodiny>4:00</hodiny>
+ </priplatek>
+Příplatků používá systém PAMICA velké množství, jsou odlišeny kódem. Často se vyskytnou případy, kdy firma pro konkrétní
+příplatek používá obecnou definici (P09, P05), ne kód doporučený systémem PAMICA. V tomto případě spárování provedou pomocí
+docházkového kódu.
+Import složek přípatků je proveden na základě identifikátorů <kod> a <dochazka_kod>, je povinné uvést alespoň jeden z nich.
+Pokud je uveden element <dochazka_kod>, při importu je vyhledána definice s tímto docházkovým kódem, element <kod> je
+nepodstatný.
+Vždy je povinný element <hodiny>.
+ <obecna_slozka>
+ <kod>P08</kod> .. ROZHODUJE o importu
+ <nazev>Příplatek za ztížené pracovní prostředí</nazev> .. nepovinné
+ <dochazka_kod>943</dochazka_kod> .. ROZHODUJE o importu
+ <dochazka_nazev>Příplatek - prostředí</dochazka_nazev> .. nepovinné, jen pro informaci
+ <hodiny>4:00</hodiny>
+ <castka>2000</castka>
+ <jednic>2</jednic>
+ </obecna_slozka>
+Pomocí obecné složky je možné importovat libovolnou výše uvedenou mzdovou složku.
+Import je proveden na základě identifikátorů <kod> a <dochazka_kod>, je povinné uvést alespoň jeden z nich.
+Pokud je uveden element <dochazka_kod>, při importu je vyhledána definice s tímto docházkovým kódem, element <kod> je
+nepodstatný.
+Po vyhledání definice pokračuje import složky výše uvedenými pravidly (týkajících se této dohledané definice).
+Řešení pomocí <obecna_slozka> se stává závislé na kódech definic používaných v systému PAMICA. Kód závisí na druhu mzdy, na
+použití jednic, na dalších okolnostech… Proto takové řešení není doporučované. Vhodné je raději použít elementy: <mzda>,
+<premie>, <osobni_ohodnoceni>.
+</mzdy>
+</dochazka_zamestnance>
